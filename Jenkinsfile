@@ -12,10 +12,18 @@ pipeline {
             }
         }
 
-        stage ('Prueba Jenkinsfile') {
+        stage ('Restaurar dependencias') {
             steps {
                 script {
-                    echo "Esto fue una prueba desde jenkinsfile"
+                    bat 'dotnet restore'
+                }
+            }
+        }
+
+        stage ('Compilacion') {
+            steps {
+                script {
+                    bat 'dotnet build --configuration Release'
                 }
             }
         }
